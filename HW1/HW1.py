@@ -42,9 +42,9 @@ def greedy_assemble(reads, min_overlap=0):
 
     for i in range(len(ham_path)):
         if i < len(ham_path) - 1:
-            super_str.append(reads[ham_path[i][0]])
+            super_str.append(reads[ham_path[i][0]][0:len(reads[ham_path[i][0]])-ham_path[i][2]])
         else:
-            super_str.append(reads[ham_path[i][0]])
+            super_str.append(reads[ham_path[i][0]][0:len(reads[ham_path[i][0]])-ham_path[i][2]])
             super_str.append(reads[ham_path[i][1]])
 
     if len(super_str)  > 0:
@@ -66,3 +66,5 @@ def greedy_assemble(reads, min_overlap=0):
 print(str(greedy_assemble(["C","A","T","G"])) == str(['ACGT']))
 
 print(str(greedy_assemble(["CGAAG", "ATCGA", "AGAG", "GGG"],4)) == str(['AGAG', 'ATCGA', 'CGAAG', 'GGG']))
+
+print(str(greedy_assemble(["GGG","CGAAG", "ATCGA", "AGAG"],3)) == str(['AGAG', 'ATCGAAG', 'GGG']))
